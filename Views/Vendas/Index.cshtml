@@ -1,0 +1,47 @@
+﻿@model IEnumerable<project_dc_system.Models.Venda>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Vendas</h1>
+
+<p>
+    <a asp-action="Create">Incluir nova venda</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.DataVenda)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ValueSortParm"]">@Html.DisplayNameFor(model => model.ValorVenda)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Cliente)</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataVenda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorVenda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente.ClienteName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.VendaId">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.VendaId">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.VendaId">Excluir</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,60 @@
+﻿@model project_dc_system.Models.Cliente
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalhes</h1>
+
+<div>
+    <h4>Cliente</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ClienteName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ClienteName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CpfOrCnpj)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CpfOrCnpj)
+        </dd>
+        <dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Telefones</th>
+                </tr>
+                    @foreach (var item in Model.Telefones)
+                    {
+                    <tr>
+                        <td>
+                                @Html.DisplayFor(modelItem => item.Fone)
+                        </td>
+                    </tr>
+                    }
+            </table>
+            <table class="table">
+                <tr>
+                    <th>Emails</th>
+                </tr>
+                    @foreach (var item in Model.Emails)
+                    {
+                    <tr>
+                        <td>
+                                @Html.DisplayFor(modelItem => item.EmailAdress)
+                        </td>
+                    </tr>
+                    }
+            </table>
+        </dd>
+        </dt>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.ClienteId">Editar</a> |
+    <a asp-action="Index">Voltar para todos os clientes</a>
+</div>

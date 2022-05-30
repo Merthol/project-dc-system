@@ -1,0 +1,54 @@
+﻿@model project_dc_system.Models.Cliente
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar</h1>
+
+<h4>Cliente</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ClienteId" />
+            <div class="form-group">
+                <label asp-for="ClienteName" class="control-label"></label>
+                <input asp-for="ClienteName" class="form-control" />
+                <span asp-validation-for="ClienteName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CpfOrCnpj" class="control-label"></label>
+                <input asp-for="CpfOrCnpj" onchange="mascara()" class="form-control" />
+                <span asp-validation-for="CpfOrCnpj" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar para todos os clientes</a>
+</div>
+
+<script>
+    function mascara(){
+        var valor = document.getElementById("CpfOrCnpj").value;
+        valor = valor.replace(/[^0-9]/g,''); // Extrai apenas os numeros digitados no campo CpfOrCnpj
+
+        if (valor.length == 11) // Formatando cpf
+            valor = valor.slice(0,3) + "." + valor.slice(3,6) + "." + valor.slice(6,9) + "-" + valor.slice(9,11);
+        else if (valor.length == 14) // Formatando cnpj
+            valor = valor.slice(0,2) + "." + valor.slice(2,5) + "." + valor.slice(5,8) + "/" + valor.slice(8,12) + "-" + valor.slice(12,14);
+
+        document.getElementById("CpfOrCnpj").value = valor;
+
+    }
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

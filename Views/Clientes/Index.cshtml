@@ -1,0 +1,41 @@
+﻿@model IEnumerable<project_dc_system.Models.Cliente>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Clientes</h1>
+
+<p>
+    <a asp-action="Create">Incluir novo cliente</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.ClienteName)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CpfOrCnpj)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClienteName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CpfOrCnpj)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ClienteId">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.ClienteId">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.ClienteId">Excluir</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

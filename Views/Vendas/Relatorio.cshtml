@@ -1,0 +1,66 @@
+﻿@model IEnumerable<project_dc_system.Models.Venda>
+
+@{
+    ViewData["Title"] = "Relatorio";
+}
+
+<h1>Relatorio</h1>
+
+
+<form asp-action="Relatorio" method="get">
+    <div class="container">
+    <div class="form-actions no-color row">
+        <p class="col">
+            Encontre pelo cliente: <input class="col" type="text" name="NameString" value="@ViewData["NameFilter"]" />
+            <input class="col" type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Relatorio" class="col">Limpar filtro</a>
+        </p>
+    </div>
+    <div class="form-actions no-color row">
+        <p class="col">
+            Encontre pela data: <input class="col" type="date" name="DateString" value="@ViewData["DateFilter"]" />
+            <input class="col" type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Relatorio" class="col-md">Limpar filtro</a>
+        </p>
+    </div>
+    <div class="form-actions no-color row">
+        <p class="col">
+            Encontre pelo valor: <input class="col" type="text" name="ValueString" value="@ViewData["ValueFilter"]" />
+            <input class="col" type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Relatorio" class="col-md">Limpar filtro</a>
+        </p>
+    </div>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Relatorio" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.DataVenda)</a>
+            </th>
+            <th>
+                <a asp-action="Relatorio" asp-route-sortOrder="@ViewData["ValueSortParm"]">@Html.DisplayNameFor(model => model.ValorVenda)</a>
+            </th>
+            <th>
+                <a asp-action="Relatorio" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Cliente)</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataVenda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorVenda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente.ClienteName)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
